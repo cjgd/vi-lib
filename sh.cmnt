@@ -1,0 +1,11 @@
+" sh.cmnt -- comments for shell and others
+"
+" $Id: sh.cmnt,v 1.1 1997/05/29 20:54:59 cdua Exp cdua $
+" Carlos Duarte, 970221/970227
+" 
+" 	K	comment one line
+" 	^O 	uncomment it
+" 
+"map K I# j
+map K 0i# j
+map  ^xxj

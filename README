@@ -1,0 +1,67 @@
+vi-lib is a collection of vi macros. 
+
+most vi macros, may even be obsolete, but show how to do some tedious
+tasks, using only vi and nothing else.
+
+--
+
+all files contains vi macros, or abbreviations [or something] that
+should be directly used by most vi clones.
+
+some are specific, for instance, the `complete' file, contains a alt-tab
+macro, that does sequential search and completion on current word,
+unfortunately, it only works with nvi quoting mechanism.
+
+--
+
+to see what each one does, check first like, something like
+	
+		head -1q *
+
+====
+result of head -1q *: 
+
+" begw - place cursor at beggining of current word
+" c.ab - shorties for C 
+" c.author - hack to ^K -- place author and date between C comments
+" c.bg -- begin macro for C code
+" c.blk - autoindents C blocks
+" c.cmnt - comments for C
+" c.misc -- miscelandeous stuff for c code
+" capicua -- reverse order of characters on line
+" caseconv - change case on things
+" center - center lines on a 80 column width
+" complete - complete keywords
+" complt -- macros for word completition
+" correct - word correction macro
+" cpp.map - cpp shorties
+" cpp.defs -- miscelandeous stuff for #defines et al 
+" date -- macros for getting and pasting dates
+" del-c-comment -- deletes all comments on a C file
+" do-author -- place mark with author and date
+" edit - edit file under cursor
+" emacs-keys - movement keys a-la emacs
+" empty -- check if line is empty
+" exec - execution and stuff alike
+" fmt - a builtin formatter
+" html.ab -- handy stuff for html
+" keys - program cursor keys to do the expected
+" keys.aux - aux macros to help building/testing macros in keys
+" lines -- line-oriented macros
+" make.ab - makefile shorties
+" mark-copyright -- place mark with author and date
+" month.ab -- abbrs of month names
+" rcs.ab -- rcs abbreviations
+" rot13 - perform rot13 encryption
+" sh.ab - shorties for shell
+" sh.cmnt - comments for shell and others
+" squeeze - squeeze blank lines
+" tester - macros to aux on testing other macros
+" undeline
+" unshar -- unshar a file
+" vi.bg -- begin macro for vi macro files 
+" vi.cmnt - comments for VI 
+" week.ab -- abbrs of week days
+" word-search -- macros to searck back and forward for the word under cursor
+" wquote - quote word
+" ws - word search 

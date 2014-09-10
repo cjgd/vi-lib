@@ -1,0 +1,12 @@
+" c.author -- hack to ^K: place author and date between C comments
+"
+" $Id: c.author,v 1.1 1997/05/29 20:57:37 cdua Exp cdua $
+" Carlos Duarte, 970225
+" 
+" 	usage: ^X^K (!)
+" 
+" 	^X^K (!) 	place mark with author and date, in a line
+" 			surrounded with C comments
+" 
+map!  kI/* A */ji
+"

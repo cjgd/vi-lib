@@ -1,0 +1,87 @@
+" word-search -- macros to searck back and forward for the word under cursor
+"
+" $Id: word-search,v 1.1 1997/05/29 20:51:16 cdua Exp cdua $
+" Carlos Duarte, 960609/970221
+"
+""""""""""""""""""""""""""""""""""""""""
+"	Deprecated-- see ws, instead - cdua, 970221
+"
+""""""""""""""""""""""""""""""""""""""""
+"	Elvis (1.8pl13) when marking a position, doesn't act like
+"	original VI
+"
+"	say:  foo_bar and mark m on _ , if we insert stuff before it,
+"	then `m still goes to right place (i.e. elvis is clever)
+"
+"	on vi, if we add things before, the mark goes to place where
+"	was our char, say 
+"
+"		foo_bar and mm on _, now add this 
+"
+"		FFF.foo_bar  `m will go to . (i.e. 4 chars before, cause
+"		I added 4 chars now)
+"
+"	so, elvis got one set of macros, and others get another set :-)
+"
+""""""""""""""""""""""""""""""""""""""""
+"
+"	the macro that begins with an ``a'' serves for backward search
+"	the other one, begins with an ``i'' serves for forward search
+"
+"	buffer and mark ``z'' is used
+"
+"	the working mechanism is the same, but reversed
+"
+"	the cursor may be at any part of current word
+"
+"	BACKWARD			FORWARD
+"
+"	word				word
+"	^				   ^
+"	cursor here			   cursor here
+"
+"		these are worst cases
+"
+"	w_ord				wor_d
+"	?\<w_ord			w_ord\>
+"	?\<w_ord\>			?\<w_ord\>
+"	?\<word\> to buffer z		?\<word\> to buffer z
+"	?\<word				word\>
+"	word				word
+"	^				   ^
+"	cursor, execute z		   cursor, execute z
+"
+" these are macros for Elvis (1.8pl13)
+"
+"map a a_mzbi?\<ea\>`zxf>"zyF?XxF?3x@z
+"map   i_mzea\>hbi/\<`zxF/"zyf>3xf>Xx@z
+"
+"
+" these are for others
+"
+" note the only diff, is when getting back to added _ , elvis is smart
+" enough to get there, as others will return to 3 posns before, i.e. the
+" number of insert chars
+"
+"map a a_mzbi?\<ea\>.`z3lxf."zyF?XXxF?3x@z
+"map   i_mzea\>hbi/\<`z3lxF/"zyf>3xf>Xx@z
+"
+" and this is for VIM!!
+" when doing a yF. , VIM actually moves to the found . and it shouldn't
+" cause it is making a yank
+"
+"	14-aug-96
+"
+"	according to Bram Moolenaar, the right thing to do is to actually 
+"	move the cursor to the first yanked char, this is also what posix 
+"	says to do
+"
+"	nvi.1.49 also does that (nvi.1.34 didn't do...)
+"
+"	so, these macros are for VIM, recent versions of NVI *AND*
+"	to all clones really POSIX/real-vi compatible 
+"
+" the forward search macro is the same as above
+"
+map a a_mzbi?\<ea\>.`z3lxf."zyF?2f\3xF?3x@z
+map   i_mzea\>hbi/\<`z3lxF/"zyf>3xf>Xx@z

@@ -1,0 +1,14 @@
+" tester -- macros to aux on testing other macros
+"
+" $Id: tester,v 1.1 1997/05/29 20:49:26 cdua Exp cdua $
+" Carlos Duarte, 960608/970222
+"
+"	L 	write and load new file
+"	q	comment current line
+"	K 	comment current line with a space after comment marker
+"
+"map L :w|so %
+map L mm:g/^[am][ba][ p]/y a|@a`m
+map q 0i"j
+map K 0i" j
+map  0xj

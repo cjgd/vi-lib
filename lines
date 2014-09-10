@@ -1,0 +1,28 @@
+" lines -- line-oriented macros
+"
+" $Id: lines,v 1.1 1997/05/29 20:52:31 cdua Exp cdua $
+" Carlos Duarte, 960603/970222
+"
+"""""""""""""""""""""""""""""""
+"
+" All these work from mark m to current line
+"
+"	_>	shift lines right
+"	_<	shift lines left
+"	_\	escape lines (\ at end)
+"	_q	quote lines (> at beg)
+"	_s	squeeze spaces on blank lines-- make an empty REAL empty
+"	_d	delete true empty lines
+"	_#	count lines
+"	_c	add '# ' to beg
+"	_u	undo the above
+" 
+map _> :'m,.>
+map _< :'m,.<
+map _\ :'m,.s/$/\\/
+map _q :'m,.s/^/> /
+map _s :'m,.g/^[^	 ]*$/s/^[	 ]*$//
+map _d :'m,.g/^$/d
+map _# :'m,.w !wc -l 
+map _c :'m,.s/^/# /
+map _u :'m,.s/^..//

@@ -1,0 +1,10 @@
+" caseconv -- change case on things
+"
+" $Id: caseconv,v 1.1 1997/05/29 20:51:00 cdua Exp cdua $
+" Carlos Duarte, 960628/970221
+" 
+" 	_LL 	change (toggle) case of cur line (whole)
+"	_WW	toggle case of current word
+"
+map _LL yyp:s/./\~/g0"fd$k@fJ
+map _WW yemeop:s/./\~/g0"fd$`e@fJ`e

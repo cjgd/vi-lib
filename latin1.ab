@@ -1,0 +1,83 @@
+" latin1.ab -- abbreviations for latin1 
+" $Id$
+" Carlos Duarte <cgd@teleweb.pt>, 990218
+"
+" note: abbreviations must end with a WORD character, so *2, for instance,
+" can not be abbr'ed, but can be mapped, like "map! *2 ^Xb2"
+"
+"
+"ab *o b0
+"ab *2 b2
+"ab -a aa
+"ab -o ba
+"
+"ab +- b1
+"ab << ab
+"ab >> bb
+"ab /4 bc
+"ab /2 bd
+"
+ab `A c0
+ab 'A c1
+ab ^A c2
+ab ~A c3
+ab :A c4
+ab .A c5
+"
+ab ,C c7
+ab ,c e7
+"
+ab `E c8
+ab 'E c9
+ab ^E ca
+ab :E cb
+"
+ab `I cc
+ab 'I cd
+ab ^I ce
+ab :I cf
+"
+ab ~N d1
+"
+ab `O d2
+ab 'O d3
+ab ^O d4
+ab ~O d5
+ab :O d6
+"
+ab `U d9
+ab 'U da
+ab ^U db
+ab :U dc
+"
+ab `a e0
+ab 'a e1
+ab ^a e2
+ab ~a e3
+ab :a e4
+ab .a e5
+"
+ab `e e8
+ab 'e e9
+ab ^e ea
+ab :e eb
+"
+ab `i ec
+ab 'i ed
+ab ^i ee
+ab :i ef
+"
+ab ~n f1
+"
+ab `o f2
+ab 'o f3
+ab ^o f4
+ab ~o f5
+ab :o f6
+"
+ab `u f9
+ab 'u fa
+ab ^u fb
+ab :u fc
+"
+ab :y ff

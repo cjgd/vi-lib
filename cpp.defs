@@ -1,0 +1,33 @@
+" cpp.defs -- miscelandeous stuff for #defines et al 
+"
+" $Id: cpp.defs,v 1.1 1997/12/13 22:14:25 cdua Exp cdua $
+" Carlos Duarte, 971213/971221
+"
+""""""""""
+"
+" (un)escape correctly a #define foo() ... do {} while(0)
+"
+"	\e somewhere after the #define to escape
+"	\u same as above, but for unescape
+"
+map \e ?define!/while[ ]*(0)/-1esc
+map \u ?define!/while[ ]*(0)/-1unesc
+"
+"
+""""""""""
+"
+" make the triology: #ifndef FOO \n #define FOO (at end) #endif 
+"
+"	\b after FOO 
+"	\f same as \p but the three lines are kept together
+map! \b yyppkkI#ifndef jI#define jI#endif /* !A */"dddmdGp'd
+map! \d yypkI#ifndef jo#endifkI#define A 
+"
+map! \c #ifdef HAVE_CONFIG_H#include <config.h>#endif
+map! \h .h>I#include <o
+"
+""""""""""
+"
+map \p :/to ==/+1;/==/-1d|-r! cproto -e -x -I. `basename % h`c
+"
+""""""""""

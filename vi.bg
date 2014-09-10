@@ -1,0 +1,9 @@
+" vi.bg -- begin macro for vi macro files 
+"
+" $Id: vi.bg,v 1.2 1997/12/14 07:45:46 cdua Exp cdua $
+" Carlos Duarte, 971213
+"
+""""""""""
+"
+map! BG "" $Id$" """""""""""
+"

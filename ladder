@@ -1,0 +1,23 @@
+" ladder -- generate a ladder-like output
+"
+" $Id$
+" Carlos Duarte <cgd@teleweb.pt>, 991025
+"
+""""""""
+" '1' -> '12' -> '123' -> '1234' ... 
+" use a map to generate the last char
+"
+""""""""
+" example 1: digits map
+"
+map g "yyy"yp$"yyl0i/: :01:12:23:34:45:56:67:78:89:90;0l"yp0"y3x@yll"yyl0df;$"yp
+"
+""""""""
+" example 2: lower alpha map
+"
+"map g "yyy"yp$"yyl0i/: :ab:bc:cd:de:ef:fg:gh:hi:ij:jk:kl:lm:mn:no:op:pq:qr:rs:st:tu:uv:vw:wx:xy:yz:za;0l"yp0"y3x@yll"yyl0df;$"yp
+"
+""""""""
+" removes the last char
+"
+map q yyp$x

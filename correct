@@ -1,0 +1,62 @@
+" correct -- word correction macro
+"
+" $Id: correct,v 1.1 1997/05/29 20:57:12 cdua Exp cdua $
+" Carlos Duarte, 970223/970225
+"
+"""""""""""""""""""""""""""""""""
+"	\c (!)
+" 
+" 	requires: 
+" 		grep 
+" 			-q 	produce no output
+" 			-s	don't report error on non existing files
+" 			exit status 0 if pattern found, !0 otherwise
+" 		sed
+" 			do accept `;' as command separator 
+" 		agrep
+" 		/bin/sh
+" 			or compatible shell command processor 
+"			i.e. with 2> redirector capability
+" 			and that must be set by default (set sh=/bin/sh)
+" 		cat
+" 		/usr/dict/words
+" 
+" 	write on file `zW' (*** !! ATTENTION !! ***) 
+" 
+" 	usage: after word write \c, and keep on until the closest word appears
+" 
+" 	example: 
+" 		histotically\c --> historically
+"
+" 	note: 
+" 		after reaching the last word, the first is the next to come
+" 		i.e. rotate through list
+"
+" 	\l (!)
+" 		print selected (i.e. closest) list of words
+"
+"	\L (!)
+"		the same as above, but paste words into text (after cur line)
+" 
+map! \c .B"wyt.mwo0iy!!grep -sq ""wpA" zW||(agrep -B ""wpA" /usr/dict/words 2>/dev/null|sed ':a;$bb;N;s/\n/./;ba;:b;s/^/ @/;s/$/./'>zW)0l"sd$@s:'wr zW|.g/@$/s/.$/./|s/^../ @/0f@r.l"wyt.f.r@!!cat>zW`wcf."wpEa
+"
+map! \l :.w ! sed 's/^..//;s/.$//g' zW|tr .@ '\n\n'
+map! \L mw:r ! sed 's/^..//;s/.$//g' zW|tr .@ '\n\n'`w
+"
+"""""""""""""""""""""""""""""""""
+"	another approach, uses agrep, grep and awk
+" 	it should be a little faster
+" 
+" 	the selected words are kept in file `zC' so BEWARE
+" 
+" 	that files contains a simple list of words, one per line
+" 
+" 	usage: 
+" 		\w (!)	corrects current word, keeps in insertion mode
+" 		@@	after \w, paste next word on next line
+" 		\W (!) 	after \w, paste ALL words on next lines
+" 
+" 
+map! \w .B"wyf.mw0i:r!grep -sq ""wpf.s" zC||(echo y|agrep -B ""wpf.s" /usr/dict/words 2>/dev/null>zC);awk 'NR==1{print;i=0}{a[i]=$0;i++}END{j=i;printf "">"zC";for(i=1;i<j;i++)print a[i]>>"zC";print a[0]>>"zC"}' zC."sd0x@s"wd$dd`wcf."wpea
+map! \W :r zC
+"

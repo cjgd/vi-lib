@@ -1,0 +1,19 @@
+" week.ab -- abbrs of week days
+"
+" $Id: week.ab,v 1.1 1997/05/29 20:53:16 cdua Exp cdua $
+" Carlos Duarte, 970221
+"
+ab Sun Sunday
+ab sun sunday
+ab Mon Monday
+ab mon monday
+ab Tue Tuesday
+ab tue tuesday
+ab Wed Wednesday
+ab wed wednesday
+ab Thu Thursday
+ab thu thursday
+ab Fri Friday
+ab fri friday
+ab Sat Saturday
+ab sat saturday

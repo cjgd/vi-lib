@@ -1,0 +1,60 @@
+" rot13 -- perform rot13 encryption
+"
+" $Id: rot13,v 1.2 1997/05/29 21:01:30 cdua Exp cdua $
+" Carlos Duarte, 970221/970529
+"
+""""""""""""""""""""""""""""""""""
+"	_RT	rot13 a single line
+"	_RG	rot13 whole file
+"
+""""""""""""""""""""""""""""""""""
+" 	_RT 	encrypt/decrypt current line
+" 
+" 		_RR ^ = are aux macros, the get and replace every char of
+" 		line, the second is to encrypt it and place it again on line,
+" 		and last one is to clean up
+" 
+"map _RT o an.bo.cp.dq.er.fs.gt.hu.iv.jw.kx.ly.mz.na.ob.pc.qd.re.sf.tg.uh.vi.wj.xk.yl.zm.AN.BO.CP.DQ.ER.FS.GT.HU.IV.JW.KX.LY.MZ.NA.OB.PC.QD.RE.SF.TG.UH.VI.WJ.XK.YL.ZM.k:s/^/./|s/./&^/g|s/$/0=/|s/^..//0_RR
+"map _RR "sx"dx@d
+"map ^ moj$"sp"spa.O0/.\./3h"sP"sdd@sl"syl$xxx`o"sPl_RR
+"map = AaJDD
+"
+""""""""""""""""""""""""""""""""""
+" 	the same interface, but a much faster version
+"	it uses two lines
+"		FROM LINE CHARS
+"		TO LINES CHARS
+"	instead having one line with from, to and a separator mixed
+"
+"map _RT o.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ..nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM.kk:s/^/./|s/./&^/g|s/$/0=/|s/^..//0_RR
+"map _RR "sx"dx@d
+"map ^ moj$x"spjx"spkO0/"sp"sdd@sj"syl`o"sPl_RR
+"map = AaJDDJD
+"
+""""""""""""""""""""""""""""""""""
+"	the same interface again, but even faster
+"	the same trick as above, but now use `f' command to search char
+"	to encrypt
+"
+"	@f is programmed by the setup macro to do `j' -- this is the command
+"	to locate the first line of the table -- it is used by the global
+"	conversion macros 
+"	and _RR use @f to locate the table, so the table can be anywhere we
+"	want
+"
+map _RT o.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ...nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM..kk:s/./f&^/g|s/$/..=/Aj"fx0_RR
+map _RR "s2x"dx@d
+map ^ mo@f$xx"spjxx"spk0@sj"syl`o"sPl_RR
+map = AaJDDJD
+"
+""""""""""""""""""""""""""""""""""
+"	_RG 	will rot13 the whole file
+"	_RX	is to do line by line (keeping a global table)
+"	_RE	is the procedure to take when reach last line
+"	- 	is equivalent to = above-- but here, when the line end 
+"		we go to the next one
+"		
+map _RG :%s/^/_RX/Go_RE1GO.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ...nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM..1Gh"f2x-
+map _RX :s/./f&^/g|s/$/..-/0_RR
+map _RE dd1G2dd
+map - j0"g3x@g

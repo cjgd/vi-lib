@@ -1,0 +1,36 @@
+" complt -- macros for word completition
+"
+" $Id: complt,v 1.1 1997/05/29 20:51:48 cdua Exp cdua $
+" Carlos Duarte, 960610/960701 
+"
+"""""""""""""""""""""""""""""""""""""""""
+""	all of those work for Elvis, 1.8pl13
+""
+""	
+""	~TAB	do single completition
+""
+"map! ~	 . hbi?\<hhmx"xyt.@x"xye`xf dF?"xpa
+"
+""
+"" 	~k 	do completition and setup stuff for ~n and ~p
+"" 	~p	previous completition
+"" 	~n	next completition
+""
+"
+"map! ~k . hbi?\<hhmx"xyt.@xmk"xye`xf dF?"xpa
+"map! ~n . hbmx`kNmk"xye`xdf "xpa
+"map! ~p . hbmx`knmk"xye`xdf "xpa
+"
+"
+"
+""""""""""""""""""""""""""""""""""""""""
+"	these next macros, work just about above ones, but a
+"	little better, I guess
+"
+"	they work with nvi.1.3.4, and vim 3.0 and elvis 1.8pl13
+"
+"
+map! ~	 . hbi?\<hhmx"xyt.@x"xye`x"xPldf a
+map! ~k . hbi?\<hhmx"xyt.@xmk"xye`x"xPldf a
+map! ~n . hbmx`kNmk"xye`xdf "xpa
+map! ~p . hbmx`knmk"xye`xdf "xpa

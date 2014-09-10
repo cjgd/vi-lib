@@ -1,0 +1,23 @@
+" cpp.map -- cpp shorties
+"
+" $Id: cpp.ab,v 1.1 1997/05/29 20:56:39 cdua Exp cdua $
+" Carlos Duarte, 970221/970222
+" 
+ab Ii #include <stdio.h> 
+ab Il #include <stdlib.h>
+ab Ic #include <ctype.h>
+ab Is #include <string.h>
+ab It #include <time.h>
+ab Id #include <stddef.h>
+ab Ia #include <stdarg.h>
+"
+ab DEF #define
+ab ELS #else
+ab END #endif
+ab IFD #ifdef
+ab IFN #ifndef
+ab IFF #if
+ab INC #include
+ab UND #undef
+ab DEN defined)i
+"

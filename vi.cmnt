@@ -1,0 +1,10 @@
+" vi.cmnt -- comments for VI 
+"
+" $Id: vi.cmnt,v 1.1 1997/05/29 20:54:47 cdua Exp cdua $
+" Carlos Duarte, 970221
+" 
+" 	K 	comment one line
+" 	^O	uncomment that line
+" 
+map K I" j
+map  ^xxj

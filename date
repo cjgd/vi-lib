@@ -1,0 +1,7 @@
+" date -- macros for getting and pasting dates
+" $Id: date,v 1.1 1997/10/26 19:24:37 cdua Exp cdua $
+" Carlos Duarte, 971026
+"
+""""
+"
+map! _D xml:r! date +\%y\%m\%d0"lDdd`ls"lpea

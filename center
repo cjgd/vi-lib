@@ -1,0 +1,155 @@
+" center -- center lines on a 80 column width
+"
+" $Id: center,v 1.1 1997/05/29 20:50:57 cdua Exp cdua $
+" Carlos Duarte, 970220/970224
+" 
+""""""""""""""""""""""""""""""""""""""""
+"	_CE	center current line
+" 	_WS	delete white space from beg and end of line
+"
+map _WS :s/^[	 ]*//|s/[	 ]*$//
+map _CE _WS$mx81a_81|D`xa:s/__/ /g$x"jy0k0"jPJ
+map _CD _WS$mx81a_81|D`xa:s/__/ /g$xkddpkJ
+"
+" _CD - changed the backend, i.e. the way to put half of the spaces
+"	at beg on line
+"
+"
+""""""""""""""""""""""""""""""""""""""""
+"	_CX	center line
+"		slower, heavly based on backtracking REs only works for
+"		perfectly centered strings, i.e. with same number of 
+"		spaces each side
+"
+"		this could be corrected by adding > \?< before >\1< on RE
+"		but nvi1.79 seems not to support it(?)
+"
+"map _CX _WS80A 81|Do.v/^\( *\)[^ ][^ ]*\([ 	]*[^ ][^ ]*\)*\1$/s/^\(.*\)\(.\)$/\2\1/|@x0"xd$kJ:@x
+"
+"
+""""""""""""""""""""""""""""""""""""""""
+"	_CC 	another approach...
+"
+map _CC _WS$mx80a 81|D`xl"xy$0"xP:s/  / /g
+"
+""""""""""""""""""""""""""""""""""""""""
+"	_C$	and another one... 
+"
+map _C$ _WSiI A @c."ad0i0l"bd0i79|aaAb80|x$i@"d2x@dl"cd0x@c
+" 
+"  Explanation for this late one: 
+" 
+" I've build this, line by line, each step on each line, then Joined all lines
+" 
+" First, how it works? 
+" 	
+" (1) check line len
+" (2) greater than 80?
+" (3) yup, goto (6) -- end
+" (4) nope, insert one space at ^ and other at $
+" (5) goto (1)
+" (6) end... 
+" 
+" How to make VI do this?
+" 
+" the harder is to get vi to check line length, I have used this trick 
+" 
+" when going to a far column (i.e. to one that does not exist, like 80| on
+" 60 chars lines) vi actually moves to $ silently, so we
+" can write a char at $, then goto 80th col, (which might coincide with
+" $ if len > 80, note now len = len+1 because the added char), we place
+" again ONE char... it must be always one char, if not, for some lens
+" the "messages" would mix. A char is always atomic.
+" Next step is to remove chars into reverse order, i.e. first goto 81th
+" col (note, if we ADD after 80th (80|aa) it gets on 81th), and del it
+" the goto to end and del it. The chars we remove are the same as we put,
+" in every cases. But they might be swapped. For instance, the char placed
+" at $, can now be deleted by the | move.
+" So, it is only need to check for one, say the last (got by $). 
+" If we put `a' (and b on 81|) on $ and get `a', line is greater than 80.
+" Else (we get `b') line is shorter.
+" 
+" Trick: program buffers `a' and `b' to do actions for short lines (<=80)
+" and for bigger (>80), respectively. 
+" 
+" Now, for short lines, ins space at ^ and $ (I ^[A ^[), and goto beg
+" of program... (see more about this below)
+" 
+" For big, we do nothing, i.e. a dummy command, like 0, or $, which 
+" never gives error. If was needed we could do cleanups here.
+" 
+" To make this continue, we must recurse, so I choose to keep a
+" buffer with the main program (i.e. the program that stuffs
+" the chars, and get them, and execute the buffers "pointed"
+" by them), this buffer is @c (we already seen @a is used
+" for short lines and @b for bigs). 
+" 
+" To actually exec the char taken out, we need another buffer
+" which just execs @a or @b, that is @d.
+" 
+" Finally, tha macro itself, just program buffers @a @b and @c
+" and start @c (the main program). It does this by inserting
+" on beg of line and del into each buffer.
+" 
+" 
+" Know, the macro has I've builtit.
+" First, mechanism to program buffers.
+" 
+" i....program... #^["ad0x
+" 
+" the program is what is going to be exec'ed... special care must be taken 
+" with quoting the ^[s and ^Vs. remember that one ^V will be eaten by EX
+" and other by VI. As for ^[ only that last after # should be interpreted.
+" 
+" The # itself is a dummy to save keys when yanking. It is deleted with
+" the final x... 
+" 
+" As we will prog. 3 bufs, some optimization may be done, to keep 
+" that dummy char, and only remove on the last.
+" 
+" With this way of loading, we can change the size of our executable
+" buffers, without changing anything else. (which would not be the
+" case it they were loaded by 0"a<count>x, for instance).
+" 
+" Now, it is just a matter of putting pieces together... without
+" quoting worrys lets see how to make that
+" 
+"   macro to wipe white sp from ^ and $
+" _WS
+" 
+"   load prog to exec on short lines
+" i ... #^["ad0x 
+" 
+"   ... is 
+" I ^[A ^[@c
+"   i.e. one char at ^ other at $ and recursively call main program-- @c
+" 
+"   load prog to exec on big lines
+" i ... #^["bd0x 
+" 
+"   ... is
+" 0
+"   i.e. a no-op! it might `o' to open a line and re-start on ins mode, 
+"   or anything else with any size
+" 
+"   load main prog 
+" i ... #^["bd0x 
+" 
+"   where ... is
+" 79|aa^[Ab^[80|x$i@^["d2x@d
+"   remember-- this isn't quoted
+"   add after 79th col an `a' 
+"   add after last col a `b'
+"   go to 80th col (where it should be the `a' for big enough lines)
+"   waste him... don't matter, as it is the opposite of the remaining
+"   goto end
+"   insert a strategic @ (to exec buffer `a' or `b', i.e. the 
+"     buffer with name of the survived char)
+"   delete both (@ and the char) into @d 
+"   and exec @d, which the only thing it does is to exec @a or @b
+" 
+"   finally start the main program
+" @c
+" 
+""""""""""""""""""""""""""""""""""""""""
+" 

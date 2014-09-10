@@ -1,0 +1,32 @@
+" keys.aux -- aux macros to help building/testing macros in keys
+"
+" $Id: keys.aux,v 1.1 1997/05/29 20:55:24 cdua Exp cdua $
+" Carlos Duarte, 970222
+" 
+"""""""""""""""""""""""
+"	g	merge macros
+"
+" example: a file has
+" "map! up new..		<- marked line
+" "map! down new..
+" "map! left new..
+" "map! right new..
+" 
+" and on the LAST 4 lines has
+" 
+" map! up old..
+" map! down old..
+" map! left old..
+" map! right old..
+" 
+" apllying g on marked line, the last lines would be now
+" 
+" map! up new..
+" map! down new..
+" map! left new..
+" map! right new..
+" 
+map g 4yyGpG\G1\G1\G1\G1\G2\G2\G2\G2:$;m-4|-j|$;m-4|-j|$;m-4|-j|$;m-4|-j
+map \G1 0d2f dwk
+map \G2 02f Dk
+"

@@ -1,0 +1,6 @@
+" unshar -- unshar a file
+"
+" $Id: unshar,v 1.1 1997/05/29 20:56:35 cdua Exp cdua $
+" Carlos Duarte, 970222
+" 
+map _US :/^#.*\/bin\/sh/,/^exit 0/w ! /bin/sh - 

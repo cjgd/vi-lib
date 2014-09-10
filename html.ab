@@ -1,0 +1,20 @@
+" html.ab -- handy stuff for html
+" $Id: html.ab,v 1.1 1997/10/13 21:31:10 root Exp $
+" Carlos Duarte, 971013
+"
+" 	*T 	tagify current word : head --> <head> </head>
+"	*Y	tagify current word, but each tag on a separate line
+"			body --> <body>
+"				 </body>
+"	*E	entity: br --> <br> 
+" 	*C	close tag: html --> </html> 
+"	*S	make symbol: amp --> &amp; 
+"	*U	(command mode) untags: <html> --> html 
+"
+map! *T ></bbi<l"qyf>f/"qpF>a 
+map! *Y ></bbi<l"qyf>f/"qpF>aO
+map! *E >bi<f>a 
+map! *C >bi</f>a 
+map! *S ;bi&f;a 
+map *U F<mm"qyf>o"qp0x$x:.g/^\//s:^.::0"qy$dd`mcf>"qp
+map! *A <a href=""></a>2F<hB"wdt<f""wpf>"wpA

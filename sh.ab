@@ -1,0 +1,17 @@
+" sh.ab -- shorties for shell
+"
+" $Id: sh.ab,v 1.1 1997/05/29 20:56:58 cdua Exp cdua $
+" Carlos Duarte, 970222
+"
+"""""""""""""""""""""""
+"
+ab WH whiledodonekkA
+ab CA case  inesack^f a
+ab BR break
+ab CO continue
+ab IF if thenfikkA
+ab EI elif thenk<<A
+ab EL else<<o
+ab FO for  indodonekk^f a
+ab RE return
+ab EX exit

@@ -1,0 +1,35 @@
+========
+:display mark
+
+	to display all marks currenly set, on form `(row,col)', 
+	as :set ruler
+
+	should produce
+
+	a (6,4)
+	b (3,4)
+	...
+
+========
+v,V like elvis
+
+	visually selects text, for yanking, deleting, etc... 
+
+	V selects on a line basis
+	v selects on a character basis
+
+========
+[a .. [z 
+]a .. ]z 
+
+	[x starts recording every keystroke on buffer x, until
+	a ]x is done
+
+	actually, the ]x is does not need to specify the x at all
+
+	idea: 
+
+		[x	starts recording 
+		[. 	stops recording
+
+	saves all ]x for future use

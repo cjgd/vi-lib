@@ -1,0 +1,14 @@
+" make.ab -- makefile shorties
+"
+" $Id: make.ab,v 1.1 1997/05/29 20:56:52 cdua Exp cdua $
+" Carlos Duarte, 970222/970225
+"
+"""""""""""""""""""""""""""""
+"
+ab CF CFLAGS	= -Wall -g # -O3 -fomit-frame-pointer
+ab CL clean:	$(RM)
+ab RM RM 	= rm -f
+ab CC CC	= gcc -pipe
+ab LD LD	= ld
+ab AS AS	= as
+"

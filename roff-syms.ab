@@ -1,0 +1,55 @@
+" roff-syms.ab -- abbreviatons for roff symbols 
+" $Id: roff-syms.ab,v 1.1 1998/06/25 18:12:59 cdua Exp cdua $
+" Carlos Duarte, 980603
+"
+" for i in a A e E i I o O u U ; do for j in \' \` \~ \^ ; do 
+" 	echo map\! $i$j \\\($j$i; 
+" done; done
+"
+map! a' \('a
+map! a` \(`a
+map! a~ \(~a
+map! a^ \(^a
+map! A' \('A
+map! A` \(`A
+map! A~ \(~A
+map! A^ \(^A
+map! e' \('e
+map! e` \(`e
+map! e~ \(~e
+map! e^ \(^e
+map! E' \('E
+map! E` \(`E
+map! E~ \(~E
+map! E^ \(^E
+map! i' \('i
+map! i` \(`i
+map! i~ \(~i
+map! i^ \(^i
+map! I' \('I
+map! I` \(`I
+map! I~ \(~I
+map! I^ \(^I
+map! o' \('o
+map! o` \(`o
+map! o~ \(~o
+map! o^ \(^o
+map! O' \('O
+map! O` \(`O
+map! O~ \(~O
+map! O^ \(^O
+map! u' \('u
+map! u` \(`u
+map! u~ \(~u
+map! u^ \(^u
+map! U' \('U
+map! U` \(`U
+map! U~ \(~U
+map! U^ \(^U
+" 
+map! c, \(,c
+map! C, \(,C
+"
+map! AO \(~ao
+map! OE \(~oe
+"

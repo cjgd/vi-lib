@@ -1,0 +1,73 @@
+" c.cmnt -- comments for C
+"
+" $Id: c.cmnt,v 1.2 1997/12/18 06:20:21 cdua Exp cdua $
+" Carlos Duarte, 970221/971221
+"
+""""""""""""""""""""""""""""""
+" 
+" 	K 	comment one single line
+" 	^O	uncomment that line
+" 
+map K I/* A */j
+map  ^3x$xxxj
+"
+""""""""""""""""""""""""""""""
+"
+"	^X* (!)	
+"		after placing the coment close delimiter */, press ^X* 
+"		to reformat the preceding comment block on a semi-standard
+"		way... 
+"
+"		like this: 
+"
+"		/*
+"
+"		line 1
+"		line 2
+"		...
+"
+"		line 3
+"		*/^X*
+"
+"		would become: 
+"
+"		/*
+"		 * 
+"		 * line 1
+"		 * line 2 
+"		 * ...
+"		 * 
+"		 * line 3
+"		 */
+"		.<--- cursor here in insertion mode
+"
+"
+"	BUGS:
+"		if line start with a tab the result won't be very nice
+"
+"map! * mm?/\*I mn:'n+1,'m-1g/./s/^/I * 0@c/:'n+1,'m-1v/./s/^/ko* J@c/:'ms/^/'nXi'mI/'n0ij0"a4x"b3x@a@b."cd0x@c o
+"
+"
+"		the same interface, same functionality, handle tabs, but only
+"		  on comments started at column one
+"
+"	BUGS: 
+"		if comment does not start at column one, the result won't 
+"		  be very nice
+"
+"		still, I prefer this to the above, as almost all comments 
+"		  with this format are at column one
+"
+"
+map! *  I 0dwf/ldwmm?/\*I mn:,'m-1s/$/@a/|'ms/$/0x/'n0i$h"c2x@c."bd0i:j!a*ila @bl"ad0x@bxmm'nX'mo
+"
+"
+"
+""""""""""""""""""""""""""""""
+"
+"	^X*
+"		undo previous one
+"
+map * ?\/\*jmm/\*\/:'m,-s/$/@a/:+s/$/ @b/'mO0i$h"d2x@d."cd0i0f*Xxxj@cl"ad0i?\/\*lx"bdd@c
+"
+""""""""""""""""""""""""""""""

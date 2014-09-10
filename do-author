@@ -1,0 +1,53 @@
+" do-author -- place mark with author and date
+"
+" $Id: do-author,v 1.1 1997/05/29 20:48:46 cdua Exp cdua $
+" Carlos Duarte, 970220/980514
+"
+""""""""""""""""""""""""""""""
+"	_K 	aux macro to get date
+"	^K (!)	place author plus date for first time
+"	^K	check for mark, and update modification time (yymmdd/yymmdd)
+"
+" place also email
+map!  Carlos Duarte <cgd@teleweb.pt>,_KkJo
+" only name
+"map!  Carlos Duarte,_KkJo
+map _K :r! date +\%y\%m\%d
+"map  mx?, [0-9]\{6\}A/:s_/.*___KkJr/`x
+"map  mx?, [0-9]\{6\}ea/D_KkJr/`x
+map  mx?, [0-9]\{6\}wmyA `yea.dt "aD_KkJr/$"ap$x`x
+"	
+"	versions of ^K
+"
+"	first: 	remove everything after `/' inclusive and then place
+"		the new date, bad if line have `/' other the one in date
+"
+"		// author; 970226 
+"
+"		would fail -- the line would be completely deleted
+"
+"	second:	delete everything after the first date, cleaner and
+"		faster than above one, but fail on this: 
+"
+"		/* author; 970226 */
+"
+"		-- delete the last `*/' either
+"
+"	third:	good enough, it will delete the old date if any, and
+"		keep rest of the line 
+"	
+""""""""""""""""""""""""""""""
+"
+" for compatibility with mark-copyright macros: 
+"
+"	^N 	replace old marks by new ones
+"	_N	awx macro to convert dates between dd-mon-yy to yymmdd
+"
+"map _N 2xEpBms"sdf-opr/$r/oJan01Feb02Mar03Apr04May05Jun06Jul07Aug08Sep09Oct10Nov11Dec1212k0"sdd@s3x"sd$`sl"spj12dd`se
+"map  mx?Updated: ?F(df wea, df:l_Nldf:2f-B_Nbhr/`x
+"
+""""""""""""""""""""""""""""""
+" 	^N	add email to old name only marks
+"
+map  /Carlos Duarte,/:s//Carlos Duarte <cgd@teleweb.pt>,/
+"

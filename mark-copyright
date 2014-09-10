@@ -1,0 +1,33 @@
+" mark-copyright -- place mark with author and date
+"
+"" (c) Carlos Duarte "" Created: 31-May-96 "" Updated: 08-Jun-96 ""
+"
+"	^K 	on insertion mode, create a line like
+"
+" /* (c) Carlos Duarte */ /* Created: 31-May-96 */ /* Updated: - */
+"
+"	^K	on command mode, update on previous made line like the above
+"
+" /* (c) Carlos Duarte */ /* Created: 31-May-96 */ /* Updated: 31-May-96 */
+"
+"	ALT-K	is used to place current date on buffer X
+"
+"
+map!  /* (c) Carlos Duarte */ /* Created: x */ /* Updated: - */kk0/xx"xPji
+map k o!!date +%d-%h-%y0"xd$
+map  mxGkdd?Updated: ?9ldt "xP`x
+"
+"
+"	F9	insertion mode, works for # comments
+"	F10	insertion mode, works for " comments
+"
+"	^K 	command mode will work for above also, but F10 and F9 are
+"		also defined (as ^K)
+"
+"	the !Fs call !^K, so beware...
+"
+"
+map! #9 k:s,/\*,##,g:s,$, ##,:s, \*/,,gji
+map #9 
+map! #10 k:s,/\*,"",g:s,$, "",:s, \*/,,gji
+map #10 

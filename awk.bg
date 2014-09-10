@@ -1,0 +1,7 @@
+" awk.bg -- begin macro for awk 
+" $Id$
+" Carlos Duarte, 980708
+"
+""""""""""
+map! BG #! /usr/bin/awk -f# yyppkAIDjA3kA
+" 

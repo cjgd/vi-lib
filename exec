@@ -1,0 +1,31 @@
+" exec -- execution and stuff alike
+"
+" $Id: exec,v 1.1 1997/05/29 20:56:13 cdua Exp cdua $
+" Carlos Duarte, 970222
+" 
+" 	_X	execute current line as VI commands
+" 	_E	execute current line as EX commands
+" 	_T	read characters to next line (opened)
+"
+" notes: 
+" 	the _X and _E don't delete the line that gets exec'ed
+" 	to actually do that, replace `"xyy' by `"xdd' on _X and 
+" 		`y x' by `d x' on _E... 
+" 
+" 	this macros are very handy,
+" 		_X serves to test and apply a semi complex task
+" 		_E idem, but also to load mappings in .exrc format
+" 			directly from the line, i.e. no need to 
+" 			escape all line EXCEPT one that contains 
+" 			the macro, and source %
+" 		_T good for doing interaction with user, from inside
+" 			alias, ex: 
+" 
+" 			map g iInsert your name: _TIYour name is 
+" 
+" 
+"
+map _X mx"xyy@x`x
+map _E :kx|y x|@x|'x
+map _T :r!cat /dev/tty
+"

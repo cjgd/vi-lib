@@ -1,0 +1,13 @@
+" edit -- edit file under cursor
+" 
+" $Id: edit,v 1.1 1997/05/29 20:53:02 cdua Exp cdua $
+" Carlos Duarte, 970221
+" 
+"""""""""""""""""""""""""""""""
+"
+"	_V	edit file which name is under cursor
+"
+" from begw
+map _BW a_mybmu`yx`u
+"
+map _V _BWyEopI:Vi "gdd@g

@@ -1,0 +1,57 @@
+" c.ab -- shorties for C 
+"
+" $Id: c.ab,v 1.1 1997/05/29 20:56:29 cdua Exp cdua $
+" Carlos Duarte, 970221/970223
+"
+"""""""""""""""""""""""""""""
+" Usage is simple: 
+" 	think on two first letters that come in mind
+" 	think on what you usually do after inserting token
+" 	place parens? place left only, like 'if(', 'wh('
+" 	place CR? place it also, like 'continue;CR'
+" 	place CR and TAB (indent)? place tab only, like 'default:TAB'
+" 	nothing special? give a space, like 'static '
+"
+ab AU auto
+ab ST static
+"ab EX extern
+ab RG register
+"
+ab US unsigned
+ab SI signed
+"
+ab VO void
+ab CH char
+ab SH short
+ab IN int
+ab LO long
+ab FL float
+ab DO double
+"
+ab EN enum {};hi
+ab SR struct {};O
+ab UN union {};O
+"
+ab GO goto
+ab BR break;
+ab CO continue;
+"
+ab SW switch ) {}kf)i
+ab DE default:
+ab CA case
+"
+ab WH while) {}kf)i
+ab FO for(;;) {}O
+ab DW do {} while();O
+ab IF if) {}kf)i
+ab EL else {}O
+ab EI else if) {}kf)i
+"
+ab TY typedef
+ab SZ sizeof)i
+ab RE return
+"
+ab MA intmain(int argc, char *argv[]){}O
+ab PF printf
+ab SF scanf
+ab EX exit);hi

@@ -1,0 +1,139 @@
+#! /bin/sh 
+
+# html.in -- produce a .exrc like file with html tag mappings 
+# $Id: html.in,v 1.2 1997/10/13 21:23:50 root Exp $
+# Carlos Duarte, 971012
+
+sed -n '
+
+1{
+	x
+	s/^/i/
+	x
+	i\
+" This was automatically produced \
+" So, dont edit it. \
+"
+
+}
+
+/./!d
+
+:switch
+x
+/i/b _i
+/0/b _0
+/1/b _1
+/2/b _2
+/3/b _3
+/4/q 
+/m/b skip
+
+s/.*/error/
+p
+q
+
+### 
+
+: _i
+x
+/^#### VI/!d
+x
+s/./0/
+x
+d
+
+: skip
+x
+/^"/{
+	x; s/./1/; x
+}
+d
+
+: _0
+x
+/^" TAGS/{
+	x; s/./m/; x; d
+}
+p
+d
+
+####
+# make tags like this, _ is the cursor
+# <tag>
+# _
+# </tag>
+: _1
+x
+/^"/ {
+	x; s/./2/; x; d
+}
+s:^\([^ ]*\) \([^ ]*\):ab \1 <\2></\2>kA:
+p
+d
+
+####
+# make this tags: 
+# <tag> _ </tag>
+: _2
+x
+/^"/ {
+	x; s/./3/; x; d
+}
+s:^\([^ ]*\) \([^ ]*\):ab \1 <\2> </\2>F>a:
+p
+d
+
+####
+# makes this tag
+# <tags _>
+: _3
+x
+/^"/ {
+	x; s/./4/; x; d
+}
+s:^\([^ ]*\) \([^ ]*\):ab \1 <\2>i:
+p
+d
+' < $0
+
+exit 
+
+#######
+#### VI 
+
+" tag (open and close)
+map! *T ></bbi<l"qyf>f/"qpF>a 
+map! *Y ></bbi<l"qyf>f/"qpF>aO
+" entity
+map! *E >bi<f>a 
+" close tag
+map! *C >bi</f>a 
+" untag
+map *U F<mm"qyf>o"qp0x$x:.g/^\//s:^.::0"qy$dd`mcf>"qp
+" symbols
+map! *S ;bi&f;a 
+
+" TAGS
+
+" open tag, new line, close tag
+
+_HT html
+_BD body
+_BO body
+_ST style
+
+" open tag, close tag (same line)
+
+_HE head
+_TI title
+_MA math
+_SQ sqrt
+
+" open tag only
+
+_RG range
+_BA base
+_BR br
+
+" exit

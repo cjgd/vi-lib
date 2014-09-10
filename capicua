@@ -1,0 +1,75 @@
+" capicua -- reverse order of characters on line
+"
+" $Id: capicua,v 1.1 1997/05/29 20:49:55 cdua Exp cdua $
+" Carlos Duarte, 960612/970520
+"
+""""""""""""""""""""""""""""""""""""""""
+" 	ql	reverse current line
+" 	qa	reverse all lines
+" 	qd	reverse all lines and add time taken on first line
+" 
+""""""""""""""""""""""""""""""""""""""""
+"	1-jul-96
+"		these work fine for Elvis, 1.8pl13
+"		but nvi.1.34 after deleting something, forgets
+"		the contents of the unamed buffer, even
+"		if we are deleting to a particulary buffer
+"
+"		so, small changes are needed, just in q1 macro
+"
+"		----
+"
+" 	ql 	insert q1 after every char, except last, on which 
+"		it appends q2
+"
+"		do setup, i.e. create next line, on which the reversed
+"		line shall stay
+"
+"	q1	do the swapping
+"
+"	q2	cleanup
+"
+" note that the ^V (the 4th char counting from the end) can be ommited
+" it is just there to prevent the call of my macro ^[k !!
+"
+map ql :s/^/#/:s/./&q1/g$r2okq1
+"map q1 0x"x2xj0Pk@x
+map q1 0"yx"x2xj0"yPk@x
+map q2 dd:s/#$//
+"
+"	qa	an hack to reverse all lines of the file
+"
+"		still uses q1
+"		q2 is replaced by q3 that is the command to next line
+"		q4 is the command for last line
+"
+map qa :%s/^/#/:%s/./&q1/g:%s/.$/3/:$s/.$/4/:%s/$//1Gq1
+map q3 jjq1
+map q4 :v/./d:%s/.$//
+"
+"
+"
+"	qd	for measuring time taken to do the job
+"		now, this will reverse all lines as above,
+"		but add two lines to the beg of the file, 
+"		the first is the output of the date command 
+"		before the thing started, the second, is the date after
+"
+"	q5	clean up and the date after QD
+"
+"
+map qd 1GO!!date:2,$s/^/#/:2,$s/./&q1/g:2,$s/.$/3/:$s/.$/5/:2,$s/$//2Gq1
+map q5 :2,$v/./d:2,$s/.$//1G:r! dateq6
+"
+"	for these next two: 
+"
+"		use the first one for getting two lines with date command
+"		the other for getting just one line with the number of 
+"		elapsed time in seconds
+"
+"
+"	uncomment for getting the two lines (just a fake macro)
+"map q6 $
+"
+"	uncomment this, for getting the elapsed time in seconds
+map q6 1GJ!! sed 'y/	/ /;s/^.*\([0-5][0-9]\):\([0-5][0-9]\)  *.*\([0-5][0-9]\):\([0-5][0-9]\)  *.*$/\3 \* 60 + \4 - \1 * 60 - \2/' | bc 

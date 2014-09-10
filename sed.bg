@@ -1,0 +1,7 @@
+" sed.bg -- begin macro for sed 
+" $Id$
+" Carlos Duarte, 980708
+"
+""""""""""
+map! BG #! /bin/sed -f# yyppkAIDjA3kA
+"

@@ -1,0 +1,46 @@
+" fmt -- a builtin formatter
+"
+" $Id: fmt,v 1.1 1997/05/29 20:50:14 cdua Exp cdua $
+" Carlos Duarte, 970220/970225
+"
+""""""""""""""""""""""""""""""
+"	Usage: _FF on a sequence of lines ended by an empty one
+"
+"	_FF	format current paragraph
+"		join all lines of it and use _FG on them
+"
+"	_FG	split current line (which may be very long)
+"		into severals of aprx same size
+"
+map _FF mf}:'f,.jo`f_FG
+map _FG 76|lBhr_FG
+"
+""""""""""""""""""""""""""""""
+"	_FM	other paragraph formatter
+"		format a sequence of lines until find an empty one
+"		clean: don't beep 
+"
+map _FM 0i76|aaAb77|x$i@"d2x@d."cd0i76|Bhr@cl"bd0i:+;g/./-s/^/J@c/:.v/./-s/^/000/k0"e3x@el"ad0x@c
+"
+"
+""""""""""""""""""""""""""""""
+"	_FT	even cleaner... 
+"		self protects itself, creating an empty line at end
+"		and remove it when exit
+"		also, don't create very BIG lines (unlike _FF)
+"		and don't depend on .v/./ and .g/./ behavior (unlike _FM)
+"		complex but good :) 
+"		use a,b,c,d,e,f,g buffers
+"		_FT: program 4 fixed buffers (c,a,b,f,g)
+"		a: buffer to exec on short lines (<=76)
+"		b: to exec on big lines (>76)
+"		c: main p
+"		d: used at runtime by @c to exec @a or @b
+"		e: used at runtime by @a to exec @f or @g
+"		f: exec on lines, which are followed by a non empty line
+"		g: exec on lines, which are followed by an empty line (cleanup)
+"
+"
+map _FT mdGo`d0i76|aaAb77|x$i@"d2x@d."cd0i76|Bhr@cl"bd0ij0ifg0 xP0i@"e2xxk@el"ad0iGdd`dl"gd0iJ@cl"fd0x@c
+"
+"

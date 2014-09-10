@@ -1,0 +1,12 @@
+" emacs-keys -- movement keys a-la emacs
+"
+" $Id: emacs-keys,v 1.1 1997/05/29 20:56:01 cdua Exp cdua $
+" Carlos Duarte, 970222
+" 
+"
+map!  i
+map!  .xa
+map!  I
+map!  A
+"
+"

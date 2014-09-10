@@ -1,0 +1,9 @@
+" c.misc -- miscelandeous stuff for c code
+"
+" $Id: c.misc,v 1.1 1997/12/15 00:07:59 cdua Exp cdua $
+" Carlos Duarte, 971214
+"
+""""""""""
+map \n :%!indent 
+"
+""""""""""

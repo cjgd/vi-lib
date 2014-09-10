@@ -1,0 +1,126 @@
+" complete -- complete keywords
+"
+" $Id: complete,v 1.1 1997/05/29 20:57:23 cdua Exp cdua $
+" Carlos Duarte, 970223/970225
+"
+""""""""""""""""""""""""""""""
+"	\TAB	a very simple word completion, scans for last anchored 	
+"		word on text, and replace current one by it
+map! \	 .bi?\<hhmi"iyt.@i"iye`icf."ipea
+"
+""""""""""""""""""""""""""""""
+"	g,=,^ 	temp macros to produce the final macro, from the build
+"		lines
+"
+"	usage: 	`g' on any place on the file will build the final mapping
+"
+"	notes: 	`^' currently do a little test automatically 
+"		g,=,^ aren't needed after the final macro is built
+"		the source lines of the macro must be ended, by 
+"		  at least, one line with a single `"' on it
+"		everything from the last line with a single `"' on 
+"		  it to bottom is deleted, so DO NOT KEEP NOTHING
+"		  BELOW THIS LINES, EXCEPT THE MACRO ITSELF
+"		
+"map g God?^"$?+11G/^"MAPy/^"$/-1Gpmm:+,$s/^/=/Gr^`mcfPmap==
+"map = :j!l"xxx@x
+"map ^ GLoaa1 aa2 a	
+"
+"	synopsis
+"		ALT-TAB
+"
+"	description
+"		complete to the next previous anchored matched
+"		words on previous text
+"
+"		if on the same word, keep going thru matches
+"
+"		if on another word, restart from the first match
+"
+"
+"	implementation
+"		
+"		for easy to build, this macro was made on several 
+"		lines, that are joined to form the final macro
+"		(see macro `g' above)
+"
+"		on first call, it:
+"			o preprogram some buffers it uses
+"			o reprograms the macro itself 
+"			o execute itself on the word
+"
+"		on second and later calls:
+"			o just execute the "new" macro on the word
+"
+"		buffers used: (i,j,k,l,m)
+"			
+"			i
+"				used to keep "program" that will 
+"				  program `j'
+"			j
+"				the search engine, if we are repeating
+"				  alt-tab on the same word it will be 
+"				  last `j' plus a `n' i.e. do the next 
+"				  previous search 
+"
+"				if the word is brand new, it is 
+"				  programmed with `?\<word^M' 
+"
+"				DO NOT EVER CHANGE `j' during vi session
+"
+"			k	
+"				hold the current word to complete
+"				
+"			l	
+"				hold previous completion done
+"				used to see if we are repeating alt-tab
+"				  on same word, or on a new one
+"
+"				DO NOT EVER CHANGE `l' during vi session
+"			m
+"				temp register to assist on building the
+"				  search engine in case of new words
+"				
+"
+"		marks used:
+"			first call: i,j
+"			2nd+ calls: i 
+"			
+"
+"MAP! 	 mj
+"o
+"0i
+"?\<_
+"
+"h"lyl
+"0"jy$
+"dd
+"`j
+":map! 	 .
+"bmi
+""kyt.
+"o
+"0
+""jp3lD"kpA
+"0"md$
+""lpA.$"kp
+"o
+""mpA
+"
+"k
+":.g/^\([^.]*\)\.\1$/+s/.*/"jpAn/
+"dd
+""id$
+"@i0"jd$
+"dd
+"`i@j
+""lye`icf."lpea
+"
+"a	
+"
+"
+"
+map! 	 mjo0i?\<_h"lyl0"jy$dd`j:map! 	 .bmi"kyt.o0"jp3lD"kpA0"md$"lpA.$"kpo"mpAk:.g/^\([^.]*\)\.\1$/+s/.*/"jpAn/dd"id$@i0"jd$dd`i@j"lye`icf."lpeaa	
+"""
+"""
+"""

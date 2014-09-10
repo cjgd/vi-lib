@@ -1,0 +1,29 @@
+" month.ab -- abbrs of month names
+"
+" $Id: month.ab,v 1.1 1997/05/29 20:53:09 cdua Exp cdua $
+" Carlos Duarte, 970221
+"
+ab Jan January
+ab jan january 
+ab Feb February
+ab feb february
+ab Mar Mars
+ab mar mars
+ab Apr April
+ab apr april
+"ab May May
+"ab may may
+ab Jun June
+ab jun june
+ab Jul July
+ab jul july
+ab Aug August
+ab aug august
+ab Sep September
+ab sep september
+ab Oct October
+ab oct october
+ab Nov November
+ab nov november
+ab Dec December
+ab dec december

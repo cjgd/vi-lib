@@ -1,0 +1,79 @@
+Some incompatibilities found on most popular vi clones available. 
+
+versions: 
+	nvi 1.79 
+	vim, 4.5
+	elvis, 2.0
+
+.............
+
+:.g/foo/ex_cmds
+
+	where foo DOES NOT exist on current line
+
+	. nvi, elvis: don't do subsequent cmds, and don't complain either
+	. vim: don't do cmds, but DOES complain (and make macro stop)
+
+:.v/foo/ex_cmds
+
+	where foo DOES exist, actually works (i.e. don't do cmds and don't 
+	complain) for all of them
+
+as of vim 4.6, this seems to be fixed.
+
+.............
+
+ma cmds `a
+
+	. nvi, vim: honors the marked column, i.e. always move back 
+	  to the same column marked
+
+	. elvis: honors marked character, i.e. it moves back to the 
+	  same char, which might be shifted right or left meanwhile
+
+.............
+
+lineA
+lineB
+
+:j! apllied anywhere on lineA
+
+	- vim: place cursor on the first char of "lineA"
+	- nvi: place cursor on last char of "lineA"
+	- elvis: cursor on first char of "lineB"
+
+lineAlineB
+^		vim
+    ^		nvi
+     ^		elvis
+
+	elvis seems to be doing the right thing
+
+.............
+
+<some text changing command> yy .
+
+vim, elvis: at '.' redo 'some text changing command'
+nvi: at '.' do nothing (perhaps it is repeating the yy)
+
+.............
+
+fire up vi, with no file, then `:r some_file' --
+	
+	vi
+	:r some_file
+
+
+	. vim, elvis: keep "no current file", and report it when saving
+	. nvi: adopts `some_file' as its new current file name, and tries
+	  to save on it, at exit
+
+.............
+
+when editing an empty file, read into some file `x'
+
+	. nvi, elvis: first line of `x' goes into first line of buffer
+	. vim: first line of `x' goes into second line of buffer -- 
+	  it lefts one blank at start
+
+.............

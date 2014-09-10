@@ -1,0 +1,52 @@
+" keys -- program cursor keys to do the expected
+"
+" $Id: keys,v 1.1 1997/05/29 20:55:10 cdua Exp cdua $
+" Carlos Duarte, 970221/970222
+" 
+"""""""""""""""""""""""
+" up/down/left/right are the keys sequences send by terminal
+" usually they might be
+"
+" 	up	[A 
+" 	down	[B
+" 	left	[C
+" 	right	[D
+" 
+" or
+" 
+"	up	OA 
+" 	down	OB
+" 	left	OC
+" 	right	OD
+" 
+" find out this by typing ^V and then the cursor key
+"
+"""""""""""""""""""""""
+" fast simple versions, with limitations
+"	up and down end ins mode when reach top/bottom
+"	left is ok, but silent when reach ^
+"	right jumps two chars when at ^ and end ins mode when reach $
+"
+"map! up     ka
+"map! down   ja
+"map! left   la
+"map! right  i
+"
+"""""""""""""""""""""""
+" slow but, little better
+"	up/down/left really ok, they do beep on top/bottom/^ AND keep ins mode
+"	right does that stuff also, but never goes past $ which it should,
+" 	this way it isn't possible to append chars on the end of line using
+" 	the right cursor key
+"
+"map! up     kih"g2x@g
+"map! down   jih"g2x@g
+"map! left   lih"g2x@g
+"map! right  hih"g2x@g
+"
+"""""""""""""""""""""""
+"
+map! [A kih"g2x@g
+map! [B jih"g2x@g
+map! [C lih"g2x@g
+map! [D hih"g2x@g

@@ -1,0 +1,80 @@
+" squeeze -- squeeze blank lines
+" 
+" $Id: squeeze,v 1.1 1997/05/29 20:51:39 cdua Exp cdua $
+" Carlos Duarte, 970221
+" 
+""""""""""""""""""""""""""""""
+"	usage: _S
+"
+"	_S	squeeze all consecutive blank lines into one
+"		setup each line with `_EJ' for empty ones, and 
+"		`_Fj' for nonempty (F - fill), and the last
+"		one gets `_Lj'.
+"		the first two chars are the name of the macro
+"		to run
+"		the third is the command the the above line
+"		will execute, if it is empty
+"		
+"		goto first, execute _R
+"
+"	_R	fetch the name of the macro to run into "d
+"		and run it, also clean the third char (only
+"		the 3rd char of the line below matters)
+"
+"	_F	macro for non empty lines
+"		just down one line and run _R again
+"
+"	_L	last line, clean up extra line added by _S
+"		don't call _R so stop here
+"
+"	_E	fetch the third char of the line below, and 
+"		execute it from this line, execute _R again
+"
+"		if line below is empty, then the fetch char is
+"		a `J', i.e. apply `J' to this empty line so 
+"		delete it 
+"
+"		if line below is non empty, the fetch `j', i.e.
+"		keep this line empty as wanted
+"
+"	
+map _S :g/./s/^/_Fj/:v/./s/^/_EJ/Go_Lj1G_R
+map _R 0"d2xx@d
+map _E j2l"sylk@s_R
+map _F j_R
+map _L dd
+"
+""""""""""""""""""""""""""""""
+" 
+" NOTE: 
+" 	This is the only true squeezer I know for VI.
+" 	The classical widespread `:v/./.,/./-1join' 
+" 	simple doesn't work as we might expect!
+" 
+" 	First, if there are empty lines at bottom, they
+" 	will get as they are-- no changes, and yet an
+" 	error report: 
+" 		if wrapscan on: error 1st addr exceeds 2nd
+" 		else: error reach eof without finding...
+" 
+" 	Second, this may wipe out single empty lines. If
+" 	a single empty line is found, the cmd performed
+" 	is equiv to `.,.join' on that line -- this: 
+" 
+" 		on nvi 1.79, elvis 2.00, vile 6.0 (unix)
+" 			delete it
+" 
+" 		on vim 4.5
+" 			keep it
+" 
+" 	VIM's behavior is the most logical, as for what is
+" 	correct, historically or POSIX, I really don't know
+" 	and probably VIM should have an option or more to
+" 	flag this event. 
+" 
+" 	But the important is that single lines will be deleted
+" 	unsing at least three popular versions of vi.
+" 
+" 	So, this macros provides the only builtin vi method
+" 	of squeezing line, of course `:%!cat -s' is so simpler...
+" 

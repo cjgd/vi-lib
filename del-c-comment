@@ -1,0 +1,6 @@
+" del-c-comment -- deletes all comments on a C file
+"
+" $Id: del-c-comment,v 1.1 1997/05/29 20:52:23 cdua Exp cdua $
+" Carlos Duarte, 960603/960608 
+"
+map QD	/\/\*d/\*\/xxQD

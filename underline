@@ -1,0 +1,12 @@
+" underline
+" 
+" $Id: underline,v 1.1 1997/05/29 20:51:59 cdua Exp cdua $
+" Carlos Duarte, 970221
+" 
+" 	
+" 	_u 	single underline current line
+" 	_U 	double underline (under and above)
+" 
+" 
+map! _U yyp:s/./-/gyykPjjo
+map! _u yyp:s/./-/go

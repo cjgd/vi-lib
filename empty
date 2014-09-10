@@ -1,0 +1,14 @@
+" empty -- check if line is empty
+"
+" $Id: empty,v 1.1 1997/05/29 20:57:02 cdua Exp cdua $
+" Carlos Duarte, 970223
+" 
+" 	this is a template
+" 	`g' can be changed to anything-- don't used recursive, etc...
+" 	buffers: 
+" 		@f - actions to exec if line is not empty
+" 		@g - to take is line is empty
+" 		@d - scratch buffer (used to exec or @f or @d)
+" 
+map g o0ithis line was empty!!0"gd$i0iThis is not empty!0"fd$kJ0ifg0 xP0i@"d2xx@d
+"
